@@ -14,8 +14,18 @@ class SiteController extends Controller
     }
 
     public function index(){
+        $count = Page::where('tempname',$this->activeTemplate)->where('slug','home')->count();
+        if($count == 0){
+            $page = new Page();
+            $page->tempname = $this->activeTemplate;
+            $page->name = 'HOME';
+            $page->slug = 'home';
+            $page->save();
+        }
         $pageTitle = 'Home';
-        return view($this->activeTemplate . 'home', compact('pageTitle'));
+        $sections = Page::where('tempname',$this->activeTemplate)->where('slug','home')->first();
+        $pageTitle = 'Home';
+        return view($this->activeTemplate . 'home', compact('pageTitle','sections'));
     }
 
     public function pages($slug)

@@ -296,16 +296,7 @@
         "no_selection": true,
         "name": "Footer Section",
         "content": {
-            "images":{
-                "background_image":{
-                    "size":"1920x768"
-                }
-
-            },
-            "box_heading": "text",
-            "box_button_name": "text",
-            "box_button_link": "text",
-            "short_details" : "textarea"
+            "copy_right_text": "text"
 
         }
     },
