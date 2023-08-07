@@ -1,3 +1,6 @@
+@php
+    $banner = getContent('banner.content',true)->data_values;
+@endphp
 <div class="header-and-banner-con w-100 float-left position-relative">
     <div class="header-and-banner-inner-con">
        <header class="main-header">
@@ -41,16 +44,11 @@
                    <div class="col-lg-7 col-sm-12 d-flex justify-content-center flex-column">
                       <div class="banner-left-con wow slideInLeft">
                          <div class="banner-heading">
-                            <h2>Hello, I Am</h2>
+                            <h2>{{@$banner->title}}</h2>
                             <ul class="dynamic-txts">
-                               <li><h1>Alina Parker</h1></li>
-                               <li><h1>Alina Parker</h1></li>
-                               <li><h1>Alina Parker</h1></li>
-                               <li><h1>Alina Parker</h1></li>
+                               <li><h1>{{@$banner->name}}</h1></li>
                              </ul>
-                            <p>Duis aute irure dolor in reprehenderit in voluptareu<br>
-                               dolore eu fugiat nulla pariatur.
-                            </p>
+                            <p>{{@$banner->info}}</p>
                          </div>
                          <div class="banner-btn generic-btn d-inline-block">
                             <a href="#Contact">Hire Me</a>
@@ -61,7 +59,7 @@
                    <div class="col-lg-5 col-sm-12">
                       <div class="banner-right-con position-relative wow slideInRight" id="banner-right-con">
                          <figure class="mb-0">
-                            <img src="{{asset($activeTemplateTrue.'/')}}/image/banner-right-img.png" alt="banner-right-img" id="banner-right-img">
+                            <img src="{{getImage('assets/images/frontend/banner/'.@$banner->background_image)}}" alt="banner-right-img" id="banner-right-img">
                          </figure>
                          <div class="cursor"></div>
                          <div class="cursor2"></div>

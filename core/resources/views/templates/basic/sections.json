@@ -1,25 +1,73 @@
 {
     "banner": {
         "builder": true,
-        "no_selection":true,
         "name": "Banner Section",
         "content": {
             "images":{
                 "background_image":{
-                    "size":"1920x1280"
+                    "size":"667x757"
                 }
             },
             "title": "text",
-            "heading": "text",
-            "sub_heading": "text",
-            "button_name":"text",
-            "button_link":"text",
-            "video_button_name":"text",
-            "video_link":"text"
+            "name": "text",
+            "info": "textarea"
         }
     },
-    "brands": {
+    "expertise": {
         "builder": true,
+        "no_selection":false,
+        "name": "My Expertise",
+        "content": {
+            "title": "text",
+            "heading": "text"
+        },
+        "element": {
+            "images":{
+                "img":{
+                    "size":"63x63"
+                },
+                "details_img":{
+                    "size":"1000x1000"
+                }
+            },
+            "title": "text",
+            "details": "textarea-nic",
+            "modal": false
+        }
+    },
+
+    "social_icon": {
+        "builder": true,
+        "no_selection": true,
+        "name": "Social Icons",
+        "element": {
+            "title": "text",
+            "social_icon": "icon",
+            "url": "text",
+            "modal": true
+        }
+    },
+    "footer": {
+        "builder": true,
+        "no_selection": true,
+        "name": "Footer Section",
+        "content": {
+            "copy_right_text": "text"
+
+        }
+    },
+
+
+
+
+
+
+
+
+
+    "brands": {
+        "builder": false,
+        "no_selection":true,
         "name": "Brand Section",
         "content": {
             "heading": "text"
@@ -35,7 +83,7 @@
     },
 
     "about": {
-        "builder": true,
+        "builder": false,
         "name": "About Us",
         "content": {
             "images":{
@@ -61,7 +109,7 @@
         }
     },
     "service": {
-        "builder": true,
+        "builder": false,
         "name": "Service Section",
         "content": {
             "images":{
@@ -80,7 +128,7 @@
         }
     },
     "why_choose_us": {
-        "builder": true,
+        "builder": false,
         "name": "Why Choose Us",
         "content": {
             "images":{
@@ -103,7 +151,7 @@
         }
     },
     "feature": {
-        "builder": true,
+        "builder": false,
         "name": "Feature Section",
         "content": {
             "images":{
@@ -129,7 +177,7 @@
         }
     },
     "business": {
-        "builder": true,
+        "builder": false,
         "name": "Business Section",
         "content": {
             "title":"text",
@@ -146,7 +194,7 @@
         }
     },
     "overview": {
-        "builder": true,
+        "builder": false,
         "name": "Overview Section",
         "content": {
             "images":{
@@ -166,7 +214,7 @@
         }
     },
     "testimonial": {
-        "builder": true,
+        "builder": false,
         "name": "Testimonial Section",
         "content": {
             "title":"text",
@@ -187,7 +235,7 @@
     },
 
     "blog": {
-        "builder": true,
+        "builder": false,
         "name": "Blog Section",
         "content": {
             "title": "text",
@@ -207,7 +255,7 @@
         }
     },
     "login": {
-        "builder": true,
+        "builder": false,
         "name": "User Login & Reg.",
         "no_selection":true,
         "content": {
@@ -219,7 +267,7 @@
         }
     },
     "agent_login": {
-        "builder": true,
+        "builder": false,
         "name": "Agent Login & Reg.",
         "no_selection":true,
         "content": {
@@ -232,7 +280,7 @@
         }
     },
     "merchant_login": {
-        "builder": true,
+        "builder": false,
         "name": "Merchant Login & Reg.",
         "no_selection":true,
         "content": {
@@ -245,7 +293,7 @@
         }
     },
     "breadcrumb": {
-        "builder": true,
+        "builder": false,
         "name": "Breadcrumb",
         "no_selection":true,
         "content": {
@@ -258,19 +306,9 @@
         }
     },
 
-    "social_icon": {
-        "builder": true,
-        "no_selection": true,
-        "name": "Social Icons",
-        "element": {
-            "title": "text",
-            "social_icon": "icon",
-            "url": "text",
-            "modal": true
-        }
-    },
+
     "contact_us": {
-        "builder": true,
+        "builder": false,
         "no_selection": true,
         "name": "Contact Us",
         "content": {
@@ -282,7 +320,7 @@
         }
     },
     "policies": {
-        "builder": true,
+        "builder": false,
         "no_selection": true,
         "name": "Policy and Terms",
         "element": {
@@ -291,15 +329,7 @@
             "modal":false
         }
     },
-    "footer": {
-        "builder": true,
-        "no_selection": true,
-        "name": "Footer Section",
-        "content": {
-            "copy_right_text": "text"
 
-        }
-    },
     "select": {
         "builder": false,
         "name": "Breadcrumb",
