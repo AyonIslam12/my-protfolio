@@ -463,7 +463,7 @@ function getPageSections($arr = false)
     $sections = json_decode(file_get_contents($jsonUrl));
     if ($arr) {
         $sections = json_decode(file_get_contents($jsonUrl), true);
-        ksort($sections);
+        // ksort($sections);
     }
     return $sections;
 }

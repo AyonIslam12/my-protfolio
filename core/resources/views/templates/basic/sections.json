@@ -36,6 +36,22 @@
         }
     },
 
+    "skills": {
+        "builder": true,
+        "no_selection": false,
+        "name": "My Skills",
+        "content": {
+            "title": "text",
+            "heading": "text",
+            "sub_heading": "textarea"
+        },
+        "element": {
+            "title": "text",
+            "perchant": "text",
+            "modal": true
+        }
+    },
+
     "social_icon": {
         "builder": true,
         "no_selection": true,
@@ -53,7 +69,6 @@
         "name": "Footer Section",
         "content": {
             "copy_right_text": "text"
-
         }
     },
 

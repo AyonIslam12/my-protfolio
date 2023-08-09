@@ -49,7 +49,6 @@ class SiteController extends Controller
         session()->put('lang', $lang);
         return redirect()->back();
     }
-
     public function placeholderImage($size = null){
         $imgWidth = explode('x',$size)[0];
         $imgHeight = explode('x',$size)[1];
