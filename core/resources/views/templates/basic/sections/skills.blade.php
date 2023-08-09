@@ -51,7 +51,7 @@
                    <p class="text-justify">{{ __(@$skills_content->sub_heading) }}</p>
 
                    <div class="generic-btn download-bnt">
-                      <a href="{{ getImage('assets/'.'Md.Mehedi-Hasan.pdf') }}"  target="_blank">Check My CV</a>
+                      <a href="{{ route('download.cv')}}">Download CV</a>
                    </div>
                 </div>
              </div>

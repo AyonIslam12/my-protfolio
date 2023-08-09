@@ -77,5 +77,15 @@ class SiteController extends Controller
         imagedestroy($image);
     }
 
-
+    public function downloadCv()
+    {
+        $file = "Md.Mehedi-Hasan.pdf";
+        $path = imagePath()['cv']['path'];
+        $full_path = $path.'/' . $file;
+        $title = $file;
+        $mimetype = mime_content_type($full_path);
+        header('Content-Disposition: attachment; filename="' . $title);
+        header("Content-Type: " . $mimetype);
+        return readfile($full_path);
+    }
 }

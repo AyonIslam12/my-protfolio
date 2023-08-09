@@ -13,7 +13,7 @@ Route::get('/clear', function(){
 
 
 
-
+Route::get('download/cv', 'SiteController@downloadCv')->name('download.cv');
 Route::get('/contact', 'SiteController@contact')->name('contact');
 Route::post('/contact', 'SiteController@contactSubmit');
 Route::get('/change/{lang?}', 'SiteController@changeLanguage')->name('lang');

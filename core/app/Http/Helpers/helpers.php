@@ -671,6 +671,9 @@ function imagePath()
         'path' => 'assets/images/extensions',
         'size' => '36x36',
     ];
+    $data['cv'] = [
+        'path' => 'assets/global/cv'
+    ];
 
     $data['seo'] = [
         'path' => 'assets/images/seo',
