@@ -47,7 +47,7 @@
        </div>
     </div>
  </div>
- @push('script')
+@push('script')
  <script>
      (function ($) {
          "use strict";

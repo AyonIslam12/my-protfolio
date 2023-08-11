@@ -51,6 +51,26 @@
             "modal": true
         }
     },
+    "portfolio": {
+        "builder": true,
+        "no_selection": false,
+        "name": "My Portfolio",
+        "content": {
+            "title": "text",
+            "heading": "text"
+        },
+        "element": {
+            "images":{
+                "product_image":{
+                    "size":"1000x600"
+                }
+            },
+            "title": "text",
+            "live_link": "text",
+            "details": "textarea-nic",
+            "modal": false
+        }
+    },
 
     "social_icon": {
         "builder": true,
