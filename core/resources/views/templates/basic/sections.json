@@ -37,8 +37,8 @@
     },
 
     "skills": {
-        "builder": true,
-        "no_selection": false,
+        "builder": false,
+        "no_selection": true,
         "name": "My Skills",
         "content": {
             "title": "text",
@@ -119,6 +119,7 @@
 
     "about": {
         "builder": false,
+        "no_selection": true,
         "name": "About Us",
         "content": {
             "images":{
@@ -145,6 +146,7 @@
     },
     "service": {
         "builder": false,
+        "no_selection": true,
         "name": "Service Section",
         "content": {
             "images":{
@@ -164,6 +166,7 @@
     },
     "why_choose_us": {
         "builder": false,
+        "no_selection": true,
         "name": "Why Choose Us",
         "content": {
             "images":{
@@ -187,6 +190,7 @@
     },
     "feature": {
         "builder": false,
+        "no_selection": true,
         "name": "Feature Section",
         "content": {
             "images":{
@@ -213,6 +217,7 @@
     },
     "business": {
         "builder": false,
+        "no_selection": true,
         "name": "Business Section",
         "content": {
             "title":"text",
@@ -230,6 +235,7 @@
     },
     "overview": {
         "builder": false,
+        "no_selection": true,
         "name": "Overview Section",
         "content": {
             "images":{
@@ -250,6 +256,7 @@
     },
     "testimonial": {
         "builder": false,
+        "no_selection": true,
         "name": "Testimonial Section",
         "content": {
             "title":"text",
@@ -271,6 +278,7 @@
 
     "blog": {
         "builder": false,
+        "no_selection": true,
         "name": "Blog Section",
         "content": {
             "title": "text",

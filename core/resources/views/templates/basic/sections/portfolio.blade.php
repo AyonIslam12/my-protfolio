@@ -2,7 +2,7 @@
     $portfolio_element = getContent('portfolio.element',false,'',1);
     $portfolio_content = getContent('portfolio.content',true)->data_values;
 @endphp
-<section class="w-100 float-left blog-con padding-top padding-bottom position-relative" id="blog">
+<section class="w-100 float-left blog-con padding-top padding-bottom position-relative" id="Portfolio">
     <div class="container">
        <div class="blog-inner-con position-relative">
           <div class="generic-title text-center">

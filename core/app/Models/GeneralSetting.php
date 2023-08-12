@@ -11,7 +11,6 @@ class GeneralSetting extends Model
     protected $casts = ['mail_config' => 'object','sms_config' => 'object','cron_run'=>'object'];
 
 
-
     public function scopeSitename($query, $pageTitle)
     {
         $pageTitle = empty($pageTitle) ? '' : ' - ' . $pageTitle;

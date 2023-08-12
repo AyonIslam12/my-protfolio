@@ -33,21 +33,6 @@ Route::middleware('admin')->group(function () {
     Route::get('notifications','AdminController@notifications')->name('notifications');
     Route::get('notification/read/{id}','AdminController@notificationRead')->name('notification.read');
     Route::get('notifications/read-all','AdminController@readAll')->name('notifications.readAll');
-
-    // Language Manager
-    Route::get('/language', 'LanguageController@langManage')->name('language.manage');
-    Route::post('/language', 'LanguageController@langStore')->name('language.manage.store');
-    Route::post('/language/delete/{id}', 'LanguageController@langDel')->name('language.manage.del');
-    Route::post('/language/update/{id}', 'LanguageController@langUpdate')->name('language.manage.update');
-    Route::get('/language/edit/{id}', 'LanguageController@langEdit')->name('language.key');
-    Route::post('/language/import', 'LanguageController@langImport')->name('language.importLang');
-
-    Route::post('language/store/key/{id}', 'LanguageController@storeLanguageJson')->name('language.store.key');
-    Route::post('language/delete/key/{id}', 'LanguageController@deleteLanguageJson')->name('language.delete.key');
-    Route::post('language/update/key/{id}', 'LanguageController@updateLanguageJson')->name('language.update.key');
-
-
-
     // General Setting
     Route::get('general-setting', [GeneralSettingController::class,'index'])->name('setting.index');
     Route::post('general-setting', 'GeneralSettingController@update')->name('setting.update');

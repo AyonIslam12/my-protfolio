@@ -25,7 +25,7 @@ class AdminController extends Controller
         return view('admin.dashboard', compact('pageTitle'));
     }
 
-  
+
 
     public function profile()
     {
@@ -106,12 +106,6 @@ class AdminController extends Controller
         return view('admin.info',compact('pageTitle', 'currentPHP', 'laravelVersion', 'serverDetails','timeZone'));
     }
 
-    public function readAll(){
-        AdminNotification::where('read_status',0)->update([
-            'read_status'=>1
-        ]);
-        $notify[] = ['success','Notifications read successfully'];
-        return back()->withNotify($notify);
-    }
+
 
 }

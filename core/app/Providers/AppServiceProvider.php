@@ -34,14 +34,13 @@ class AppServiceProvider extends ServiceProvider
         $viewShare['general'] = $general;
         $viewShare['activeTemplate'] = $activeTemplate;
         $viewShare['activeTemplateTrue'] = activeTemplate(true);
-        $viewShare['language'] = Language::all();
         $viewShare['pages'] = Page::where('tempname',$activeTemplate)->where('is_default',0)->get();
         view()->share($viewShare);
-        view()->composer('admin.partials.topnav', function ($view) {
-            $view->with([
-                'adminNotifications'=>AdminNotification::where('read_status',0)->orderBy('id','desc')->get(),
-            ]);
-        });
+        // view()->composer('admin.partials.topnav', function ($view) {
+        //     $view->with([
+        //         'adminNotifications'=>AdminNotification::where('read_status',0)->orderBy('id','desc')->get(),
+        //     ]);
+        // });
         view()->composer('partials.seo', function ($view) {
             $seo = Frontend::where('data_keys', 'seo.data')->first();
             $view->with([

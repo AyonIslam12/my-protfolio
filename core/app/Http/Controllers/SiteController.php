@@ -22,7 +22,6 @@ class SiteController extends Controller
             $page->slug = 'home';
             $page->save();
         }
-        $pageTitle = 'Home';
         $sections = Page::where('tempname',$this->activeTemplate)->where('slug','home')->first();
         $pageTitle = 'Home';
         return view($this->activeTemplate . 'home', compact('pageTitle','sections'));
@@ -36,18 +35,38 @@ class SiteController extends Controller
         return view($this->activeTemplate . 'pages', compact('pageTitle','sections'));
     }
 
+    public function expertise()
+    {
+        $count = Page::where('tempname',$this->activeTemplate)->where('slug','expertise')->count();
+        if($count == 0){
+            $page = new Page();
+            $page->tempname = $this->activeTemplate;
+            $page->name = 'Expertise';
+            $page->slug = 'expertise';
+            $page->save();
+        }
+        $sections = Page::where('tempname',$this->activeTemplate)->where('slug','expertise')->first();
+        $pageTitle = 'Expertise';
+        return view($this->activeTemplate .'expertise',compact('pageTitle','sections'));
+    }
+    public function portfolio()
+    {
+        $count = Page::where('tempname',$this->activeTemplate)->where('slug','portfolio')->count();
+        if($count == 0){
+            $page = new Page();
+            $page->tempname = $this->activeTemplate;
+            $page->name = 'Portfolio';
+            $page->slug = 'portfolio';
+            $page->save();
+        }
+        $sections = Page::where('tempname',$this->activeTemplate)->where('slug','portfolio')->first();
+        $pageTitle = 'Portfolio';
+        return view($this->activeTemplate .'portfolio',compact('pageTitle','sections'));
+    }
     public function contact()
     {
         $pageTitle = "Contact Us";
         return view($this->activeTemplate . 'sections.contact',compact('pageTitle'));
-    }
-
-    public function changeLanguage($lang = null)
-    {
-        $language = Language::where('code', $lang)->first();
-        if (!$language) $lang = 'en';
-        session()->put('lang', $lang);
-        return redirect()->back();
     }
     public function placeholderImage($size = null){
         $imgWidth = explode('x',$size)[0];

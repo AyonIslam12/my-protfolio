@@ -82,13 +82,7 @@
                         </ul>
                     </div>
                 </li>
-                <li class="sidebar-menu-item  {{menuActive(['admin.language.manage','admin.language.key'])}}">
-                    <a href="{{route('admin.language.manage')}}" class="nav-link"
-                       data-default-url="{{ route('admin.language.manage') }}">
-                        <i class="menu-icon las la-language"></i>
-                        <span class="menu-title">@lang('Language') </span>
-                    </a>
-                </li>
+
                 <li class="sidebar__menu-header">@lang('Frontend Manager')</li>
 
                 <!--<li class="sidebar-menu-item {{menuActive('admin.frontend.templates')}}">-->
