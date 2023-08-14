@@ -20,7 +20,7 @@
                         <div class="service-box-item-content">
                             <h4>{{ @$item->data_values->title }}</h4>
                             <p>{{shortDescription(strip_tags(@$item->data_values->details,200))}}</p>
-                            <a href="javascript:void(0)" class="detailsBtn" data-title ="{{ @$item->data_values->title }}" data-img="{{getImage('assets/images/frontend/expertise/'.@$item->data_values->details_img)}}" data-details ="{{ $item->data_values->details }}">{{ __("Read More") }}</a>
+                            <a href="javascript:void(0)" class="detailsBtnE" data-title ="{{ @$item->data_values->title }}" data-img="{{getImage('assets/images/frontend/expertise/'.@$item->data_values->details_img)}}" data-details ="{{ $item->data_values->details }}">{{ __("Read More") }}</a>
                         </div>
                         </div>
                     </div>
@@ -31,7 +31,7 @@
        </div>
     </div>
  </section>
- <div id="detailsModel" class="modal fade" tabindex="-1" style="display: none;" aria-hidden="true">
+ <div id="detailsModelE" class="modal fade" tabindex="-1" style="display: none;" aria-hidden="true">
     <div class="modal-dialog">
        <div class="modal-content">
           <div class="modal-header">
@@ -51,8 +51,8 @@
  <script>
      (function ($) {
          "use strict";
-        $('.detailsBtn').on('click', function() {
-            var modal = $('#detailsModel');
+        $('.detailsBtnE').on('click', function() {
+            var modal = $('#detailsModelE');
             var title = $(this).data('title');
             $('._title').text(title);
             var image = $(this).data('img');

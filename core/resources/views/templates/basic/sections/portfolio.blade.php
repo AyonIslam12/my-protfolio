@@ -15,18 +15,18 @@
                 <div class="col-lg-4 pb-4">
                     <div class="blog-box-item">
                        <div class="blog-img">
-                          <a  href="javascript:void(0)" class="detailsBtn" data-title ="{{ @$item->data_values->title }}" data-img="{{getImage('assets/images/frontend/portfolio/'.@$item->data_values->product_image)}}" data-details ="{{ $item->data_values->details }}">
+                          <a  href="javascript:void(0)" class="detailsBtnP" data-title ="{{ @$item->data_values->title }}" data-img="{{getImage('assets/images/frontend/portfolio/'.@$item->data_values->product_image)}}" data-details ="{{ $item->data_values->details }}">
                              <figure class="mb-0">
-                                <img src="{{getImage('assets/images/frontend/portfolio/'.@$item->data_values->product_image)}}" alt="blog-img" class="img-fluid">
+                                <img src="{{getImage('assets/images/frontend/portfolio/'.@$item->data_values->product_image)}}" alt="img" class="img-fluid">
                              </figure>
                           </a>
                        </div>
                        <div class="blog-content">
                           <div class="blog-auteher-title">
-                             <span>Md. Mehedi Hasan</span>
+                             <span>{{ __("Md. Mehedi Hasan") }}</span>
                              <span class="float-lg-right">{{ __(diffForHumans(@$item->created_at)) }}</span>
                           </div>
-                          <a  href="javascript:void(0)" class="detailsBtn" data-title ="{{ @$item->data_values->title }}" data-img="{{getImage('assets/images/frontend/portfolio/'.@$item->data_values->product_image)}}" data-details ="{{ $item->data_values->details }}">
+                          <a  href="javascript:void(0)" class="detailsBtnP" data-title ="{{ @$item->data_values->title }}" data-img="{{getImage('assets/images/frontend/portfolio/'.@$item->data_values->product_image)}}" data-details ="{{ $item->data_values->details }}">
                              <h5><p>{{ __(@$item->data_values->title) }}</p></h5>
                           </a>
                           <a href="{{ @$item->data_values->live_link }}" target="_blank">{{ __("Live Link") }}</a>
@@ -39,7 +39,7 @@
        </div>
     </div>
 </section>
-<div id="detailsModel" class="modal fade" tabindex="-1" style="display: none;" aria-hidden="true">
+<div id="detailsModelP" class="modal fade" tabindex="-1" style="display: none;" aria-hidden="true">
     <div class="modal-dialog">
        <div class="modal-content">
           <div class="modal-header">
@@ -59,8 +59,8 @@
  <script>
      (function ($) {
          "use strict";
-        $('.detailsBtn').on('click', function() {
-            var modal = $('#detailsModel');
+        $('.detailsBtnP').on('click', function() {
+            var modal = $('#detailsModelP');
             var title = $(this).data('title');
             $('._title').text(title);
             var image = $(this).data('img');

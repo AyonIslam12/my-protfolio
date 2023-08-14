@@ -77,10 +77,24 @@ class SiteController extends Controller
         $pageTitle = 'Testimonials';
         return view($this->activeTemplate .'testimonial',compact('pageTitle','sections'));
     }
+    public function blog()
+    {
+        $count = Page::where('tempname',$this->activeTemplate)->where('slug','blog')->count();
+        if($count == 0){
+            $page = new Page();
+            $page->tempname = $this->activeTemplate;
+            $page->name = 'Blog';
+            $page->slug = 'blog';
+            $page->save();
+        }
+        $sections = Page::where('tempname',$this->activeTemplate)->where('slug','blog')->first();
+        $pageTitle = 'Blog';
+        return view($this->activeTemplate .'blog',compact('pageTitle','sections'));
+    }
     public function contact()
     {
         $pageTitle = "Contact Us";
-        return view($this->activeTemplate . 'sections.contact',compact('pageTitle'));
+        return view($this->activeTemplate . 'contact',compact('pageTitle'));
     }
     public function placeholderImage($size = null){
         $imgWidth = explode('x',$size)[0];
