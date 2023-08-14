@@ -16,7 +16,7 @@
                         <a  href="{{route('pages',[$data->slug])}}" >{{__($data->name)}}</a>
                     </li>
                 @endforeach
-                <li class="d-inline-block pr-0"><a href="#Contact">@lang('Contact')</a></li>
+                <li class="d-inline-block pr-0"><a href="{{ route('contact') }}">@lang('Contact')</a></li>
              </ul>
           </div>
           <div class="footer-social-icon">
@@ -34,4 +34,4 @@
           <p class="mb-0">{{__(@$footer->copy_right_text)}}</p>
        </div>
     </div>
- </div>
+</div>

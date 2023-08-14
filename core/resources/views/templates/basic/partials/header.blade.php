@@ -33,7 +33,7 @@
 
                       </ul>
                       <div class="d-inline-block contact">
-                         <a href="#Contact">Contact</a>
+                         <a href="{{ route('contact') }}">{{ __("Contact") }}</a>
                       </div>
                    </div>
                 </nav>

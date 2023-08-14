@@ -5,6 +5,8 @@ use Carbon\Carbon;
 use App\Models\Language;
 use Illuminate\Http\Request;
 use App\Models\AdminNotification;
+use App\Models\EmailTemplate;
+use App\Models\GeneralSetting;
 use App\Models\Page;
 
 class SiteController extends Controller
@@ -93,8 +95,61 @@ class SiteController extends Controller
     }
     public function contact()
     {
-        $pageTitle = "Contact Us";
-        return view($this->activeTemplate . 'contact',compact('pageTitle'));
+        $count = Page::where('tempname',$this->activeTemplate)->where('slug','contact')->count();
+        if($count == 0){
+            $page = new Page();
+            $page->tempname = $this->activeTemplate;
+            $page->name = 'Contact';
+            $page->slug = 'contact';
+            $page->save();
+        }
+        $sections = Page::where('tempname',$this->activeTemplate)->where('slug','contact')->first();
+        $pageTitle = 'Contact Us';
+        return view($this->activeTemplate .'contact',compact('pageTitle','sections'));
+    }
+    public function contactSubmit(Request $request){
+        $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'subject' => 'required|string',
+            'message' => 'required|string',
+        ]);
+        $shortCodes =   [
+            'name' =>$request->name,
+            'email' =>$request->email,
+            'phone' =>$request->phone,
+            'message' =>$request->message,
+        ];
+        $general = GeneralSetting::first();
+        $emailTemplate = EmailTemplate::where('act', "SEND_EMAIL")->where('email_status', 1)->first();
+        if ($general->en != 1 || !$emailTemplate) {
+            return;
+        }
+        $message = shortCodeReplacer("{{fullname}}", $request->name, $general->email_template);
+        $message = shortCodeReplacer("{{username}}", str_replace(' ','',$request->name), $message);
+        $message = shortCodeReplacer("{{message}}", $emailTemplate->email_body, $message);
+        if (empty($message)) {
+            $message = $emailTemplate->email_body;
+        }
+        foreach ($shortCodes as $code => $value) {
+            $message = shortCodeReplacer('{{' . $code . '}}', $value, $message);
+        }
+        try {
+            $config = $general->mail_config;
+            if ($config->name == 'php') {
+                sendPhpMail('md.mehedihasaniubat@gmail.com', str_replace(' ','',$request->name),$request->subject, $message, $general);
+            } else if ($config->name == 'smtp') {
+                sendSmtpMail($config,'md.mehedihasaniubat@gmail.com', str_replace(' ','',$request->name), $request->subject, $message,$general);
+            }
+        } catch (\Exception $exp) {
+            $notify[] = ['error', 'Something is wrong,Please try again later'];
+            return back()->withNotify($notify);
+        }
+        $notify[] = ['success', 'Your Email Sent Successfully'];
+        return back()->withNotify($notify);
+
+
     }
     public function placeholderImage($size = null){
         $imgWidth = explode('x',$size)[0];

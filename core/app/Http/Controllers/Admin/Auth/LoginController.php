@@ -27,7 +27,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    public $redirectTo = 'admin';
+    public $redirectTo = 'ayon-dev';
 
     /**
      * Create a new controller instance.
@@ -46,7 +46,7 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        $pageTitle = "Admin Login";
+        $pageTitle = "Owner Login";
         return view('admin.auth.login', compact('pageTitle'));
     }
 
@@ -59,15 +59,12 @@ class LoginController extends Controller
     {
         return Auth::guard('admin');
     }
-
     public function username()
     {
         return 'username';
     }
-
     public function login(Request $request)
     {
-
         $this->validateLogin($request);
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
         // the login attempts for this application. We'll key this by the username and
@@ -95,7 +92,7 @@ class LoginController extends Controller
     {
         $this->guard('admin')->logout();
         $request->session()->invalidate();
-        return $this->loggedOut($request) ?: redirect('/admin');
+        return $this->loggedOut($request) ?: redirect('/ayon-dev');
     }
 
     public function resetPassword()

@@ -1,14 +1,11 @@
 <?php
 
 use Carbon\Carbon;
-use App\Models\EmailLog;
 use App\Models\Frontend;
-use App\Models\Extension;
 use App\Models\EmailTemplate;
 use App\Models\GeneralSetting;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
-
 
 function sidebarVariation(){
 
@@ -24,14 +21,12 @@ function sidebarVariation(){
     return $variation;
 
 }
-
 function systemDetails()
 {
-    $system['name'] = 'xcash';
-    $system['version'] = '1.5';
+    $system['name'] = 'Portfolio';
+    $system['version'] = '1.0.0';
     return $system;
 }
-
 function getLatestVersion()
 {
     $param['purchasecode'] = env("PURCHASECODE");
@@ -44,26 +39,18 @@ function getLatestVersion()
         return null;
     }
 }
-
-
 function slug($string)
 {
     return Illuminate\Support\Str::slug($string);
 }
-
-
 function shortDescription($string, $length = 120)
 {
     return Illuminate\Support\Str::limit($string, $length);
 }
-
-
 function shortCodeReplacer($shortCode, $replace_with, $template_string)
 {
     return str_replace($shortCode, $replace_with, $template_string);
 }
-
-
 function keyGenerator($length = 50) {
     $characters = 'abcdefghijklmnpqrstuvwxyz0123456789';
     $string = '';
@@ -73,7 +60,6 @@ function keyGenerator($length = 50) {
     }
     return $string;
 }
-
 function verificationCode($length)
 {
     if ($length == 0) return 0;
@@ -84,7 +70,6 @@ function verificationCode($length)
     }
     return random_int($min, $max);
 }
-
 function getNumber($length = 8)
 {
     $characters = '1234567890';
@@ -95,7 +80,6 @@ function getNumber($length = 8)
     }
     return $randomString;
 }
-
 //moveable
 function uploadImage($file, $location, $size = null, $old = null, $thumb = null)
 {
@@ -121,7 +105,6 @@ function uploadImage($file, $location, $size = null, $old = null, $thumb = null)
 
     return $filename;
 }
-
 function uploadFile($file, $location, $size = null, $old = null){
     $path = makeDirectory($location);
     if (!$path) throw new Exception('File could not been created.');
@@ -134,28 +117,20 @@ function uploadFile($file, $location, $size = null, $old = null){
     $file->move($location,$filename);
     return $filename;
 }
-
 function makeDirectory($path)
 {
     if (file_exists($path)) return true;
     return mkdir($path, 0755, true);
 }
-
-
 function removeFile($path)
 {
     return file_exists($path) && is_file($path) ? @unlink($path) : false;
 }
 
-
-
-
-
-
 function activeTemplate($asset = false)
 {
     $general = GeneralSetting::first(['active_template']);
-    $template = $general->active_template;
+    $template = $general->active_template??"basic";
     $sess = session()->get('template');
     if (trim($sess)) {
         $template = $sess;
@@ -163,7 +138,6 @@ function activeTemplate($asset = false)
     if ($asset) return 'assets/templates/' . $template . '/';
     return 'templates.' . $template . '.';
 }
-
 function activeTemplateName()
 {
     $general = GeneralSetting::first(['active_template']);
@@ -173,64 +147,6 @@ function activeTemplateName()
         $template = $sess;
     }
     return $template;
-}
-
-
-function loadReCaptcha()
-{
-    $reCaptcha = Extension::where('act', 'google-recaptcha2')->where('status', 1)->first();
-    return $reCaptcha ? $reCaptcha->generateScript() : '';
-}
-
-
-function loadAnalytics()
-{
-    $analytics = Extension::where('act', 'google-analytics')->where('status', 1)->first();
-    return $analytics ? $analytics->generateScript() : '';
-}
-
-function loadTawkto()
-{
-    $tawkto = Extension::where('act', 'tawk-chat')->where('status', 1)->first();
-    return $tawkto ? $tawkto->generateScript() : '';
-}
-
-
-function loadFbComment()
-{
-    $comment = Extension::where('act', 'fb-comment')->where('status',1)->first();
-    return  $comment ? $comment->generateScript() : '';
-}
-
-function loadCustomCaptcha($height = 46, $width = '300px', $bgcolor = '#003', $textcolor = '#abc')
-{
-    $textcolor = '#'.GeneralSetting::first()->base_color;
-    $captcha = Extension::where('act', 'custom-captcha')->where('status', 1)->first();
-    if (!$captcha) {
-        return 0;
-    }
-    $code = rand(100000, 999999);
-    $char = str_split($code);
-    $ret = '<link href="https://fonts.googleapis.com/css?family=Henny+Penny&display=swap" rel="stylesheet">';
-    $ret .= '<div style="height: ' . $height . 'px; line-height: ' . $height . 'px; width:' . $width . '; text-align: center; background-color: ' . $bgcolor . '; color: ' . $textcolor . '; font-size: ' . ($height - 20) . 'px; font-weight: bold; letter-spacing: 20px; font-family: \'Henny Penny\', cursive;  -webkit-user-select: none; -moz-user-select: none;-ms-user-select: none;user-select: none;  display: flex; justify-content: center;">';
-    foreach ($char as $value) {
-        $ret .= '<span style="    float:left;     -webkit-transform: rotate(' . rand(-60, 60) . 'deg);">' . $value . '</span>';
-    }
-    $ret .= '</div>';
-    $captchaSecret = hash_hmac('sha256', $code, $captcha->shortcode->random_key->value);
-    $ret .= '<input type="hidden" name="captcha_secret" value="' . $captchaSecret . '">';
-    return $ret;
-}
-
-
-function captchaVerify($code, $secret)
-{
-    $captcha = Extension::where('act', 'custom-captcha')->where('status', 1)->first();
-    $captchaSecret = hash_hmac('sha256', $code, $captcha->shortcode->random_key->value);
-    if ($captchaSecret == $secret) {
-        return true;
-    }
-    return false;
 }
 
 function getTrx($length = 12)
@@ -243,94 +159,28 @@ function getTrx($length = 12)
     }
     return $randomString;
 }
-
-
 function getAmount($amount, $length = 8)
 {
     $amount = round($amount, $length);
     return $amount + 0;
 }
-
-function showAmount($amount, $currency = null, $separate = true, $exceptZeros = false){
-    if($currency && $currency->currency_type != 1){
-        $decimal = 8;
-    }else{
-        $decimal = 2;
-    }
-    $separator = '';
-    if($separate){
-        $separator = ',';
-    }
-    $printAmount = number_format($amount, $decimal, '.', $separator);
-    if($exceptZeros){
-    $exp = explode('.', $printAmount);
-        if($exp[1]*1 == 0){
-            $printAmount = $exp[0];
-        }
-    }
-    return $printAmount;
-}
-
-
 function removeElement($array, $value)
 {
     return array_diff($array, (is_array($value) ? $value : array($value)));
 }
 
-function cryptoQR($wallet)
-{
-
-    return "https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=$wallet&choe=UTF-8&chf=bg,s,FFFFFF00";
-}
-
-
-function curlContent($url)
-{
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    $result = curl_exec($ch);
-    curl_close($ch);
-    return $result;
-}
-
-
-function curlPostContent($url, $arr = null)
-{
-    if ($arr) {
-        $params = http_build_query($arr);
-    } else {
-        $params = '';
-    }
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    $result = curl_exec($ch);
-    curl_close($ch);
-    return $result;
-}
-
-
 function inputTitle($text)
 {
     return ucfirst(preg_replace("/[^A-Za-z0-9 ]/", ' ', $text));
 }
-
-
 function titleToKey($text)
 {
     return strtolower(str_replace(' ', '_', $text));
 }
-
-
 function str_limit($title = null, $length = 10)
 {
     return \Illuminate\Support\Str::limit($title, $length);
 }
-
 //moveable
 function getIpInfo()
 {
@@ -343,11 +193,7 @@ function getIpInfo()
     if (filter_var(@$_SERVER['HTTP_CLIENT_IP'], FILTER_VALIDATE_IP)){
         $ip = $_SERVER['HTTP_CLIENT_IP'];
     }
-
-
     $xml = @simplexml_load_file("http://www.geoplugin.net/xml.gp?ip=" . $ip);
-
-
     $country =  @$xml->geoplugin_countryName;
     $city =     @$xml->geoplugin_city;
     $area =     @$xml->geoplugin_areaCode;
@@ -366,7 +212,6 @@ function getIpInfo()
 
     return $data;
 }
-
 //moveable
 function osBrowser(){
     $userAgent = $_SERVER['HTTP_USER_AGENT'];
@@ -425,7 +270,6 @@ function osBrowser(){
 
     return $data;
 }
-
 function siteName()
 {
     $general = GeneralSetting::first();
@@ -436,11 +280,8 @@ function siteName()
     } else {
         $title = "<span>$general->sitename</span>";
     }
-
     return $title;
 }
-
-
 //moveable
 function getTemplates()
 {
@@ -454,11 +295,8 @@ function getTemplates()
         return null;
     }
 }
-
-
 function getPageSections($arr = false)
 {
-
     $jsonUrl = resource_path('views/') . str_replace('.', '/', activeTemplate()) . 'sections.json';
     $sections = json_decode(file_get_contents($jsonUrl));
     if ($arr) {
@@ -467,8 +305,6 @@ function getPageSections($arr = false)
     }
     return $sections;
 }
-
-
 function getImage($image,$size = null)
 {
     $clean = '';
@@ -480,19 +316,14 @@ function getImage($image,$size = null)
     }
     return asset('assets/images/default.png');
 }
-
 function notify($user, $type, $shortCodes = null)
 {
 
     sendEmail($user, $type, $shortCodes);
 }
-
-
-
 function sendEmail($user, $type = null, $shortCodes = [],$log=true)
 {
     $general = GeneralSetting::first();
-
     $emailTemplate = EmailTemplate::where('act', $type)->where('email_status', 1)->first();
     if ($general->en != 1 || !$emailTemplate) {
         return;
@@ -510,30 +341,13 @@ function sendEmail($user, $type = null, $shortCodes = [],$log=true)
     foreach ($shortCodes as $code => $value) {
         $message = shortCodeReplacer('{{' . $code . '}}', $value, $message);
     }
-
     $config = $general->mail_config;
-    if($log){
-        $emailLog = new EmailLog();
-        $emailLog->user_id = $user->id;
-        $emailLog->user_id = $user->id;
-        $emailLog->mail_sender = $config->name;
-        $emailLog->email_from = $general->sitename.' '.$general->email_from;
-        $emailLog->email_to = $user->email;
-        $emailLog->subject = $emailTemplate->subj;
-        $emailLog->message = $message;
-        $emailLog->save();
-
-    }
-
-
     if ($config->name == 'php') {
         sendPhpMail($user->email, $user->username,$emailTemplate->subj, $message, $general);
     } else if ($config->name == 'smtp') {
         sendSmtpMail($config, $user->email, $user->username, $emailTemplate->subj, $message,$general);
     }
 }
-
-
 function sendPhpMail($receiver_email, $receiver_name, $subject, $message,$general)
 {
     $headers = "From: $general->sitename <$general->email_from> \r\n";
@@ -542,8 +356,6 @@ function sendPhpMail($receiver_email, $receiver_name, $subject, $message,$genera
     $headers .= "Content-Type: text/html; charset=utf-8\r\n";
     @mail($receiver_email, $subject, $message, $headers);
 }
-
-
 function sendSmtpMail($config, $receiver_email, $receiver_name, $subject, $message,$general)
 {
     $mail = new PHPMailer(true);
@@ -576,10 +388,6 @@ function sendSmtpMail($config, $receiver_email, $receiver_name, $subject, $messa
         throw new Exception($e);
     }
 }
-
-
-
-
 function getPaginate($paginate = 20)
 {
     return $paginate;
@@ -588,8 +396,6 @@ function getPaginate($paginate = 20)
  function paginateLinks($data, $design = 'admin.partials.paginate'){
     return $data->appends(request()->all())->links($design);
  }
-
-
 function menuActive($routeName, $type = null)
 {
     if ($type == 3) {
@@ -623,7 +429,6 @@ function menuActiveWeb($routeName)
         return $class;
     }
 }
-
 function sanitizedParam($param) {
     $pattern[0]     = ",";
     $pattern[1]     = "#";
@@ -648,18 +453,11 @@ function sanitizedParam($param) {
     $sanitizedParam = str_replace($pattern, "", $param);
     return $sanitizedParam;
 }
-
-
 function imagePath()
 {
 
     $data['image'] = [
         'default' => 'assets/images/default.png',
-    ];
-
-    $data['language'] = [
-        'path' => 'assets/images/lang',
-        'size' => '64x64'
     ];
     $data['logoIcon'] = [
         'path' => 'assets/images/logoIcon',
@@ -667,14 +465,9 @@ function imagePath()
     $data['favicon'] = [
         'size' => '128x128',
     ];
-    $data['extensions'] = [
-        'path' => 'assets/images/extensions',
-        'size' => '36x36',
-    ];
     $data['cv'] = [
         'path' => 'assets/global/cv'
     ];
-
     $data['seo'] = [
         'path' => 'assets/images/seo',
         'size' => '600x315'
@@ -685,36 +478,27 @@ function imagePath()
             'size'=>'400x400'
         ]
     ];
-
     return $data;
 }
-
 function diffForHumans($date)
 {
     $lang = session()->get('lang');
     Carbon::setlocale($lang);
     return Carbon::parse($date)->diffForHumans();
 }
-
 function showDateTime($date, $format = 'Y-m-d h:i A')
 {
     $lang = session()->get('lang');
     Carbon::setlocale($lang);
     return Carbon::parse($date)->translatedFormat($format);
 }
-
 //moveable
 function sendGeneralEmail($email, $subject, $message_data, $receiver_name = '')
 {
-
     $general = GeneralSetting::first();
-
-
     if ($general->en != 1 || !$general->email_from) {
         return;
     }
-
-
     $message = shortCodeReplacer("{{fullname}}", $receiver_name, $general->email_template);
     $message = shortCodeReplacer("{{username}}",$receiver_name, $message);
     $message = shortCodeReplacer("{{message}}", $message_data, $message);
@@ -727,7 +511,6 @@ function sendGeneralEmail($email, $subject, $message_data, $receiver_name = '')
         sendSmtpMail($config, $email, $receiver_name, $subject, $message, $general);
     }
 }
-
 function getContent($data_keys, $singleQuery = false, $limit = null,$orderById = false)
 {
     if ($singleQuery) {
@@ -745,7 +528,6 @@ function getContent($data_keys, $singleQuery = false, $limit = null,$orderById =
     }
     return $content;
 }
-
 function urlPath($routeName,$routeParam=null){
     if($routeParam == null){
         $url = route($routeName);
@@ -756,9 +538,6 @@ function urlPath($routeName,$routeParam=null){
     $path = str_replace($basePath,'',$url);
     return $path;
 }
-
-
-
 function queryBuild($key, $value)
 {
     $queries = request()->query();

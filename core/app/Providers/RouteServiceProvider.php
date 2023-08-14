@@ -41,7 +41,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->routes(function () {
             Route::middleware('web')
                 ->namespace($this->namespace.'\\Admin')
-                ->prefix('admin')
+                ->prefix('ayon-dev')
                 ->name('admin.')
                 ->group(base_path('routes/admin.php'));
             Route::middleware('web')

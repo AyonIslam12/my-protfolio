@@ -35,7 +35,7 @@
     <script src="{{asset($activeTemplateTrue.'/')}}/js/popper.min.js"> </script>
     <script src="{{asset($activeTemplateTrue.'/')}}/js/bootstrap.min.js"> </script>
     <script src="{{asset($activeTemplateTrue.'/')}}/js/custom-script.js"> </script>
-    <script src="{{asset($activeTemplateTrue.'/')}}/js/contact-form.js"></script>
+    {{-- <script src="{{asset($activeTemplateTrue.'/')}}/js/contact-form.js"></script> --}}
     <script>
        filterSelection("all")
        function filterSelection(c) {
@@ -70,15 +70,15 @@
        }
 
        // Add active class to the current button (highlight it)
-       var btnContainer = document.getElementById("myBtnContainer");
-       var btns = btnContainer.getElementsByClassName("btn");
-       for (var i = 0; i < btns.length; i++) {
-       btns[i].addEventListener("click", function(){
-       var current = document.getElementsByClassName("active");
-       current[0].className = current[0].className.replace(" active", "");
-       this.className += " active";
-       });
-       }
+    //    var btnContainer = document.getElementById("myBtnContainer");
+    //    var btns = btnContainer.getElementsByClassName("btn");
+    //    for (var i = 0; i < btns.length; i++) {
+    //    btns[i].addEventListener("click", function(){
+    //    var current = document.getElementsByClassName("active");
+    //    current[0].className = current[0].className.replace(" active", "");
+    //    this.className += " active";
+    //    });
+    //    }
     </script>
     <script>
        var btn = $('#button');

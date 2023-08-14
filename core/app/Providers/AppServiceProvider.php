@@ -6,7 +6,6 @@ use App\Models\GeneralSetting;
 use App\Models\Language;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
-use App\Models\AdminNotification;
 use App\Models\Frontend;
 use App\Models\Page;
 
