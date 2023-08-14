@@ -2,45 +2,49 @@
     $content = getContent('testimonial.content',true)->data_values;
     $elements = getContent('testimonial.element',false,'',1);
 @endphp
-
-<section class="pt-100 pb-100">
+<section class="w-100 float-left padding-top padding-bottom tastimonials-con position-relative text-lg-left text-center" id="testimonials">
     <div class="container">
-      <div class="row">
-        <div class="col-lg-6">
-          <div class="section-header">
-            <span class="section-subtitle border-left wow fadeInUp" data-wow-duration="0.3" data-wow-delay="0.1s">{{__(@$content->title)}}</span>
-            <h2 class="section-title wow fadeInUp" data-wow-duration="0.3" data-wow-delay="0.3s">{{__(@$content->heading)}}</h2>
-            <p class="mt-3 wow fadeInUp" data-wow-duration="0.3" data-wow-delay="0.5s">{{__(@$content->sub_heading)}}</p>
+        <div class="generic-title text-center">
+            <h6>{{ __(@$content->title) }}</h6>
+            <h2 class="text-light">{{ __(@$content->heading) }}</h2>
+         </div>
+       <div class="row">
+          <div class="col-lg-5">
+             <div class="tastimonials-left-con wow slideInLeft" >
+                <figure class="mb-0">
+                   <img src="{{asset($activeTemplateTrue.'/')}}/image/tastimonials-img.png" alt="tastimonials-img" class="img-fluid">
+                </figure>
+             </div>
           </div>
-        </div>
-      </div><!-- row end -->
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="testimonial-slide-area">
-              <div class="thumb">
-                  <div class="thumb-slider">
-                  @foreach ($elements as $el)
-                    <div class="single-slide">
-                    <img src="{{getImage('assets/images/frontend/testimonial/'.@$el->data_values->author_image,'1080x620')}}" alt="img" data-animation="fadeInUp" data-delay=".3s">
+          <div class="col-lg-7">
+             <div id="carouselExampleControls" class="carousel slide wow slideInRight" data-ride="carousel" >
+                <div class="carousel-inner">
+                    @foreach ( $elements as $key=> $item)
+                    <div class="carousel-item {{ $key == 0 ?'active':'' }}">
+                       <div class="testimonials-content">
+                          <figure class="mb-0">
+                             <img src="{{asset($activeTemplateTrue.'/')}}/image/comma-icon.png" alt="comma-icon" class="img-fluid">
+                          </figure>
+                          <div class="testimonials-inner-content">
+                             <p>{{ __(@$item->data_values->quote) }}</p>
+                             <span class="d-block auther-name">{{ __(@$item->data_values->author_name) }}</span>
+                             <span class="d-block">{{ __(@$item->data_values->designation) }}</span>
+                          </div>
+                       </div>
                     </div>
-                  @endforeach
-              </div>
-            </div>
-            <div class="content">
-              <div class="content-slider">
-                @foreach ($elements as $el)
-                    
-                <div class="single-slide">
-                  <h3 class="name text-white">{{@$el->data_values->author_name}}</h3>
-                  <span class="mt-1">{{__(@$el->data_values->designation)}}</span>
-                  <p class="mt-3">{{__(@$el->data_values->quote)}}</p>
+
+                 @endforeach
                 </div>
-                @endforeach
-                
-              </div>
-            </div>
-          </div><!-- testimonial-single end -->
-        </div>
-      </div>
+                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                <i class="fas fa-arrow-left d-flex align-items-center justify-content-center"></i>
+                <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                <i class="fas fa-arrow-right d-flex align-items-center justify-content-center"></i>
+                <span class="sr-only">Next</span>
+                </a>
+             </div>
+          </div>
+       </div>
     </div>
-   </section>
+ </section>

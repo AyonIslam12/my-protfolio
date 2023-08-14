@@ -63,6 +63,20 @@ class SiteController extends Controller
         $pageTitle = 'Portfolio';
         return view($this->activeTemplate .'portfolio',compact('pageTitle','sections'));
     }
+    public function testimonial()
+    {
+        $count = Page::where('tempname',$this->activeTemplate)->where('slug','testimonials')->count();
+        if($count == 0){
+            $page = new Page();
+            $page->tempname = $this->activeTemplate;
+            $page->name = 'Testimonials';
+            $page->slug = 'testimonials';
+            $page->save();
+        }
+        $sections = Page::where('tempname',$this->activeTemplate)->where('slug','testimonials')->first();
+        $pageTitle = 'Testimonials';
+        return view($this->activeTemplate .'testimonial',compact('pageTitle','sections'));
+    }
     public function contact()
     {
         $pageTitle = "Contact Us";

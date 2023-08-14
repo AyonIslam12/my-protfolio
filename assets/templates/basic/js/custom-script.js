@@ -68,7 +68,7 @@ item.addEventListener('mousemove',function(e){
 item.addEventListener('mouseover',function(e){
   let x = e.layerX
   item.style.transform = `rotate(-1deg)`;
-  console.log("rotate" + x);
+  // console.log("rotate" + x);
 
 });
 item.addEventListener('mouseout',function(e){
@@ -88,7 +88,7 @@ item.addEventListener('mouseout',function(e){
 });
 
 })
-console.log(section_element.length);
+// console.log(section_element.length);
 
 cur.addEventListener('mousemove', function(e){
   var x = e.clientX;
